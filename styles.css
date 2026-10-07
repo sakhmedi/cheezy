@@ -473,8 +473,16 @@ body.is-dragging { user-select: none; -webkit-user-select: none; cursor: grabbin
   .hero-art { width: min(55%, 280px); order: -1; }
   .hero-title { font-size: clamp(48px, 11vw, 88px); margin-bottom: var(--space-6); }
   .btn-large { padding: 14px 22px; font-size: var(--fs-body-sm); }
-  .builder, .order-grid { grid-template-columns: 1fr; }
+  .builder, .order-grid { grid-template-columns: minmax(0, 1fr); }
+  .builder > *, .order-grid > *, .order-col { min-width: 0; }
   .builder-stage { position: static; }
+  /* Phone/tablet order: pizza -> toppings tray -> size/crust/sauce -> summary,
+     so toppings can be dragged without scrolling away from the pizza. */
+  .builder-side { display: contents; }
+  .builder-stage { order: 1; }
+  .builder-side > .panel:nth-child(2) { order: 2; }
+  .builder-side > .panel:nth-child(1) { order: 3; }
+  .builder-side > .summary-panel { order: 4; }
   .steps { grid-template-columns: 1fr; }
   .section-head-split { grid-template-columns: 1fr; gap: var(--space-6); }
   .arch-photo { max-width: 420px; width: 100%; justify-self: center; }
@@ -491,8 +499,18 @@ body.is-dragging { user-select: none; -webkit-user-select: none; cursor: grabbin
   .panel, .builder-stage { padding: var(--space-5); }
   .footer-band { grid-template-columns: 1fr; padding: var(--space-8) var(--space-6); }
   .float[data-float="pizza"] { --size: 120px !important; }
-  .tray { display: flex; overflow-x: auto; gap: var(--space-3); padding-bottom: var(--space-2); scroll-snap-type: x proximity; }
-  .ingredient { flex: 0 0 100px; scroll-snap-align: start; touch-action: pan-x; }
+  .tray { display: flex; overflow-x: auto; gap: var(--space-3); padding-bottom: var(--space-2); scroll-snap-type: x proximity; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+  .ingredient { flex: 0 0 92px; scroll-snap-align: start; touch-action: pan-x; }
+  .builder-stage { padding: var(--space-4); }
+  .toolbar { gap: 6px; margin-bottom: var(--space-3); }
+  .toolbar .btn-tool { padding: 8px 12px; min-height: 40px; font-size: 12px; }
+  .toolbar-spacer { display: none; }
+  .board { width: 100%; padding: 3%; }
+  .topping-count { margin-top: var(--space-3); }
+  .piece-remove { top: -10px; right: -10px; width: 28px; height: 28px; }
+  .trash { opacity: 0; }
+  .trash.is-visible, .trash.is-hot { opacity: 1; }
+  .drop-hint { bottom: 0; }
   body { padding-bottom: 84px; }
   .mobile-bar {
     position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60;
@@ -510,7 +528,8 @@ body.is-dragging { user-select: none; -webkit-user-select: none; cursor: grabbin
 }
 @media (max-width: 400px) {
   .header-inner .btn-small { padding: 8px 12px; }
-  .toolbar .btn-tool { padding: 8px 12px; }
+  .toolbar .btn-tool { padding: 8px 10px; }
+  .pill-row { gap: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
