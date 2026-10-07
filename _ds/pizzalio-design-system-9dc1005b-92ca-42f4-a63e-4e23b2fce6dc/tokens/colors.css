@@ -1,0 +1,28 @@
+:root{
+/* Tomato — primary */
+--tomato-50:#FFF1EA;--tomato-100:#FDE0D2;--tomato-200:#FBC0A4;--tomato-300:#F89468;--tomato-400:#F5713A;--tomato-500:#F2541B;--tomato-600:#D9430F;--tomato-700:#B23608;--tomato-800:#852805;
+/* Bubblegum — secondary pink */
+--pink-50:#FFF0F4;--pink-100:#FCDDE5;--pink-200:#FAC2D2;--pink-300:#F9A3BF;--pink-400:#F7769F;--pink-500:#EE5788;--pink-600:#D23C6E;
+/* Apricot — tertiary */
+--apricot-100:#FDE8CC;--apricot-200:#FBD5A8;--apricot-300:#FABD77;--apricot-400:#F9A548;--apricot-500:#EE8B22;
+/* Peach — soft fills */
+--peach-100:#FCE6DA;--peach-200:#F9D4C2;--peach-300:#F5BEA5;
+/* Cream — surfaces */
+--cream-0:#FFFCF7;--cream-50:#FFF8EF;--cream-100:#FBEEDD;--cream-200:#F5E1C8;--cream-300:#ECCFAE;
+/* Crust — ink */
+--crust-900:#2E1A12;--crust-800:#43281B;--crust-700:#5A3A2B;--crust-500:#8A6A58;--crust-300:#B9A08F;
+/* Semantic */
+--basil-100:#DDEFD9;--basil-500:#3E8E4A;--basil-700:#2B6634;
+--danger-100:#F9D9D6;--danger-500:#C62A2A;
+--warning-100:#FDE8CC;--warning-500:#C9700F;
+
+/* Aliases */
+--bg-page:var(--cream-50);--bg-section:var(--cream-100);--bg-band:var(--tomato-500);
+--surface-card:var(--cream-0);--surface-card-warm:var(--peach-100);--surface-card-pink:var(--pink-100);--surface-sunken:var(--cream-200);
+--text-heading:var(--tomato-500);--text-body:var(--crust-800);--text-strong:var(--crust-900);--text-muted:var(--crust-500);--text-on-accent:var(--cream-0);--text-accent-pink:var(--pink-400);
+--border-subtle:var(--cream-300);--border-strong:var(--crust-700);--border-accent:var(--tomato-500);
+--action-primary:var(--tomato-500);--action-primary-hover:var(--tomato-600);--action-primary-press:var(--tomato-700);
+--action-pink:var(--pink-400);--action-pink-hover:var(--pink-500);
+--focus-ring:var(--pink-400);
+--success:var(--basil-500);--success-bg:var(--basil-100);--danger:var(--danger-500);--danger-bg:var(--danger-100);--warning:var(--warning-500);--warning-bg:var(--warning-100);
+}

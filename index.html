@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheezy — Build Your Own Pizza</title>
+  <meta name="description" content="Design your own pizza by dragging toppings onto it, then order it to your door.">
+
+  <!-- Pizzalio design system: tokens (colors, type, spacing, effects) -->
+  <link rel="stylesheet" href="_ds/pizzalio-design-system-9dc1005b-92ca-42f4-a63e-4e23b2fce6dc/styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Lucide icons (design-system icon set) -->
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#builder">Skip to the pizza builder</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="logo">CHEEZY</a>
+      <nav aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="#builder">Build</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#order">Order</a></li>
+        </ul>
+      </nav>
+      <a href="#builder" class="btn btn-primary btn-small"><i data-lucide="pizza"></i>Start building</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO (full viewport) ============ -->
+    <section class="hero" data-parallax>
+      
+
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Fresh dough · Stone oven · Built by you</p>
+          <h1 class="display hero-title">
+            <span>Your pizza.</span>
+            <span>Your rules.</span>
+            <span class="script hero-script">go wild</span>
+          </h1>
+          <p class="lead">Drag, drop and pile on your favourite toppings. We bake it exactly the way you built it.</p>
+          <div class="hero-actions">
+            <a href="#builder" class="btn btn-primary btn-large">Build my pizza<i data-lucide="arrow-right"></i></a>
+            <a href="#how" class="btn btn-outline btn-large">How it works</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-pizza-wrap" data-spin>
+            <img class="hero-pizza-img" src="assets/pizza-hero.png" alt="" width="900" height="900">
+          </div>
+        </div>
+      </div>
+
+      <a href="#how" class="scroll-cue"><span>Scroll</span><i data-lucide="arrow-down"></i></a>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section id="how" class="section" data-parallax>
+      <div class="container">
+        <div class="band">
+          <h2 class="display section-title on-band">How it works <span class="script section-script">easy as pie</span></h2>
+          <figure class="band-photo">
+            <img src="assets/people/group.png" alt="Five friends sitting on the floor laughing and sharing pizza from open boxes" loading="lazy">
+            <figcaption class="band-photo-tag"><span class="script">good pizza,</span><span class="label">good people</span></figcaption>
+          </figure>
+          <ol class="steps">
+            <li class="step">
+              <span class="icon-disc" aria-hidden="true"><i data-lucide="ruler"></i></span>
+              <span class="step-num">01</span>
+              <h3>Pick size &amp; crust</h3>
+              <p>Small, medium or large. Classic, thin or cheese-stuffed.</p>
+            </li>
+            <li class="step step-warm">
+              <span class="icon-disc" aria-hidden="true"><i data-lucide="hand"></i></span>
+              <span class="step-num">02</span>
+              <h3>Drag on toppings</h3>
+              <p>Drop each topping exactly where you want it. Move it or toss it any time.</p>
+            </li>
+            <li class="step step-pink">
+              <span class="icon-disc" aria-hidden="true"><i data-lucide="bike"></i></span>
+              <span class="step-num">03</span>
+              <h3>Confirm &amp; order</h3>
+              <p>Tell us where to deliver and pay when it arrives.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PIZZA BUILDER ============ -->
+    <section id="builder" class="section builder-section" aria-labelledby="builderTitle" data-parallax>
+      <div class="container">
+        <div class="section-head section-head-split">
+          <figure class="arch-photo arch-photo-pink">
+            <img src="assets/people/male.png" alt="Young man in sunglasses biting a pepperoni slice and pointing" loading="lazy">
+          </figure>
+          <div class="section-head-copy">
+            <p class="eyebrow">Yes, you</p>
+            <h2 id="builderTitle" class="display section-title section-title-left">Build your pizza <span class="script section-script">make it yours</span></h2>
+            <p>Drag toppings onto the pizza, or tap one to drop it on a random spot.</p>
+          </div>
+        </div>
+
+        <div class="builder">
+          <div class="builder-stage">
+            <div class="toolbar" role="toolbar" aria-label="Pizza tools">
+              <button type="button" class="btn btn-tool" id="undoBtn"><i data-lucide="undo-2"></i>Undo</button>
+              <button type="button" class="btn btn-tool" id="clearBtn"><i data-lucide="eraser"></i>Clear</button>
+              <button type="button" class="btn btn-tool btn-tool-pink" id="surpriseBtn"><i data-lucide="dices"></i>Surprise me</button>
+              <span class="toolbar-spacer"></span>
+              <button type="button" class="btn btn-tool" id="challengeBtn" aria-pressed="false"><i data-lucide="timer"></i>Challenge</button>
+              <button type="button" class="btn btn-tool btn-icon" id="soundBtn" aria-pressed="false" aria-label="Sound effects"><i data-lucide="volume-x"></i></button>
+            </div>
+
+            <div class="challenge-card" id="challengeCard" hidden>
+              <div class="challenge-head">
+                <strong>Customer wants</strong>
+                <span class="challenge-timer" id="challengeTimer">60s</span>
+              </div>
+              <ul class="challenge-list" id="challengeList"></ul>
+            </div>
+
+            <div class="board" id="board">
+              <div class="pizza" id="pizza" data-size="medium" data-crust="classic" data-sauce="tomato">
+                <div class="pizza-crust"></div>
+                <div class="pizza-sauce"></div>
+                <div class="pizza-cheese"></div>
+                <div class="pizza-toppings" id="toppingsLayer"></div>
+                <div class="particles" id="particles"></div>
+              </div>
+              <p class="drop-hint" id="dropHint">Drop it on the pizza!</p>
+            </div>
+
+            <p class="topping-count" id="toppingCount">0 / 40 toppings</p>
+          </div>
+
+          <div class="builder-side">
+            <div class="panel">
+              <fieldset class="option-group">
+                <legend>Size</legend>
+                <div class="pill-row">
+                  <label class="pill"><input type="radio" name="size" value="small"><span>Small<small>25 cm · $8</small></span></label>
+                  <label class="pill"><input type="radio" name="size" value="medium"><span>Medium<small>30 cm · $11</small></span></label>
+                  <label class="pill"><input type="radio" name="size" value="large"><span>Large<small>35 cm · $14</small></span></label>
+                </div>
+              </fieldset>
+              <fieldset class="option-group">
+                <legend>Crust</legend>
+                <div class="pill-row">
+                  <label class="pill"><input type="radio" name="crust" value="classic"><span>Classic</span></label>
+                  <label class="pill"><input type="radio" name="crust" value="thin"><span>Thin</span></label>
+                  <label class="pill"><input type="radio" name="crust" value="stuffed"><span>Cheese-stuffed<small>+$2</small></span></label>
+                </div>
+              </fieldset>
+              <fieldset class="option-group">
+                <legend>Sauce</legend>
+                <div class="pill-row">
+                  <label class="pill"><input type="radio" name="sauce" value="tomato"><span class="pill-inline"><i class="swatch swatch-tomato"></i>Tomato</span></label>
+                  <label class="pill"><input type="radio" name="sauce" value="garlic"><span class="pill-inline"><i class="swatch swatch-garlic"></i>White garlic</span></label>
+                  <label class="pill"><input type="radio" name="sauce" value="bbq"><span class="pill-inline"><i class="swatch swatch-bbq"></i>BBQ</span></label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel-title">Toppings</h3>
+              <div class="tray" id="tray"></div>
+            </div>
+
+            <aside class="panel panel-warm summary-panel" aria-label="Pizza summary">
+              <div class="price-row">
+                <span class="label">Your pizza</span>
+                <strong class="price-value" id="priceValue">$11</strong>
+              </div>
+              <div class="score">
+                <div class="score-head">
+                  <span>Pizza Score <small>(just for fun)</small></span>
+                  <strong id="scoreValue">0</strong>
+                </div>
+                <div class="score-track" role="progressbar" aria-label="Pizza score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="scoreBar">
+                  <div class="score-fill" id="scoreFill"></div>
+                </div>
+                <p class="score-label" id="scoreLabel">Empty canvas</p>
+              </div>
+              <a href="#order" class="btn btn-primary btn-block">Review order<i data-lucide="arrow-right"></i></a>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ORDER ============ -->
+    <section id="order" class="section order-section" aria-labelledby="orderTitle" data-parallax>
+      <div class="container">
+        <div class="order-grid" id="orderView">
+          <div class="order-col">
+          <div class="panel order-summary">
+            <h2 id="orderTitle" class="display section-title section-title-left">Your order</h2>
+            <div class="summary-top">
+              <div class="snapshot" id="snapshot" aria-hidden="true"></div>
+              <dl class="details">
+                <div><dt>Size</dt><dd id="sumSize"></dd></div>
+                <div><dt>Crust</dt><dd id="sumCrust"></dd></div>
+                <div><dt>Sauce</dt><dd id="sumSauce"></dd></div>
+              </dl>
+            </div>
+            <h3 class="panel-title">Toppings</h3>
+            <ul class="summary-toppings" id="sumToppings"></ul>
+
+            <div class="quantity">
+              <span id="qtyLabel" class="label">Quantity</span>
+              <div class="stepper" role="group" aria-labelledby="qtyLabel">
+                <button type="button" class="btn btn-icon btn-round" id="qtyMinus" aria-label="One pizza less"><i data-lucide="minus"></i></button>
+                <output id="qtyValue" aria-live="polite">1</output>
+                <button type="button" class="btn btn-icon btn-round" id="qtyPlus" aria-label="One pizza more"><i data-lucide="plus"></i></button>
+              </div>
+            </div>
+
+            <dl class="breakdown">
+              <div><dt>Base (size)</dt><dd id="bdBase"></dd></div>
+              <div><dt>Crust</dt><dd id="bdCrust"></dd></div>
+              <div><dt>Toppings</dt><dd id="bdToppings"></dd></div>
+              <div><dt>Per pizza</dt><dd id="bdPerPizza"></dd></div>
+              <div><dt>Subtotal <span id="bdQty"></span></dt><dd id="bdSubtotal"></dd></div>
+              <div><dt>Delivery <small>(free over $25)</small></dt><dd id="bdDelivery"></dd></div>
+              <div class="breakdown-total"><dt>Total</dt><dd id="bdTotal"></dd></div>
+            </dl>
+          </div>
+          <figure class="photo-card">
+            <img src="assets/people/female.png" alt="Woman in an orange beanie and yellow sunglasses winking while biting a slice" loading="lazy">
+            <figcaption><span class="script">see you soon</span></figcaption>
+          </figure>
+          </div>
+
+          <form class="panel order-form" id="orderForm" novalidate>
+            <h3 class="panel-title">Delivery details</h3>
+
+            <div class="field">
+              <label for="fName">Full name <span class="req" aria-hidden="true">*</span></label>
+              <input id="fName" name="name" type="text" autocomplete="name" required aria-describedby="fNameError">
+              <p class="field-error" id="fNameError" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="fPhone">Phone <span class="req" aria-hidden="true">*</span></label>
+              <input id="fPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+1 555 123 4567" required aria-describedby="fPhoneError">
+              <p class="field-error" id="fPhoneError" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="fAddress">Address <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="fAddress" name="address" rows="2" autocomplete="street-address" required aria-describedby="fAddressError"></textarea>
+              <p class="field-error" id="fAddressError" aria-live="polite"></p>
+            </div>
+
+            <fieldset class="field">
+              <legend>Delivery time</legend>
+              <div class="pill-row">
+                <label class="pill"><input type="radio" name="when" value="asap" checked><span>As soon as possible</span></label>
+                <label class="pill"><input type="radio" name="when" value="scheduled"><span>Pick a time</span></label>
+              </div>
+              <label class="visually-hidden" for="fTime">Delivery time</label>
+              <input id="fTime" name="time" type="time" class="time-input" disabled aria-describedby="fTimeError">
+              <p class="field-error" id="fTimeError" aria-live="polite"></p>
+            </fieldset>
+
+            <div class="field">
+              <label for="fNotes">Notes for the courier <span class="optional">(optional)</span></label>
+              <textarea id="fNotes" name="notes" rows="2" placeholder="Buzzer 4B, ring twice"></textarea>
+            </div>
+
+            <fieldset class="field">
+              <legend>Payment</legend>
+              <div class="pill-row">
+                <label class="pill"><input type="radio" name="payment" value="cash" checked><span class="pill-inline"><i data-lucide="banknote"></i>Cash on delivery</span></label>
+                <label class="pill"><input type="radio" name="payment" value="card"><span class="pill-inline"><i data-lucide="credit-card"></i>Card on delivery</span></label>
+              </div>
+              <p class="hint">You pay the courier. We never ask for card details online.</p>
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary btn-large btn-block">Place order<i data-lucide="arrow-right"></i></button>
+          </form>
+        </div>
+
+        <div class="success panel" id="successView" hidden tabindex="-1">
+          <svg class="checkmark" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="24"></circle>
+            <path d="M15 27 l7 7 l15 -15"></path>
+          </svg>
+          <h2 class="display section-title">Order placed <span class="script section-script">grazie!</span></h2>
+          <p class="success-lead">Your pie is in the oven. Order <strong id="successNumber"></strong></p>
+          <p>Estimated delivery: <strong id="successEta"></strong></p>
+          <ul class="success-summary" id="successSummary"></ul>
+          <button type="button" class="btn btn-primary btn-large" id="buildAnotherBtn">Build another pizza</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-band">
+        <div>
+          <p class="logo logo-light">CHEEZY</p>
+          <p class="footer-note">A demo site. Not a real business, no real orders.</p>
+        </div>
+        <div>
+          <h3 class="label">Opening hours</h3>
+          <p>Mon–Thu 11:00–22:00<br>Fri–Sun 11:00–23:30</p>
+        </div>
+        <div>
+          <h3 class="label">Contact (placeholder)</h3>
+          <p>123 Example Street, Sampletown<br>+1 555 000 0000<br>hello@example.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ FLOATING UI ============ -->
+  <div class="mobile-bar" id="mobileBar">
+    <div>
+      <span class="mobile-bar-label">Total</span>
+      <strong id="mobileTotal">$11</strong>
+    </div>
+    <a href="#order" class="btn btn-primary">Review order</a>
+  </div>
+
+  <div class="trash" id="trash" aria-hidden="true"><i data-lucide="trash-2"></i>Drop here to remove</div>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <div class="visually-hidden" id="liveRegion" aria-live="polite"></div>
+  <div class="confetti-layer" id="confetti" aria-hidden="true"></div>
+
+  <dialog class="dialog" id="confirmDialog" aria-labelledby="confirmTitle">
+    <h2 id="confirmTitle" class="display">Place order for <span id="confirmTotal"></span>?</h2>
+    <p>You'll pay the courier on delivery.</p>
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-outline" id="cancelOrderBtn">Cancel</button>
+      <button type="button" class="btn btn-primary" id="placeOrderBtn">Confirm</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
