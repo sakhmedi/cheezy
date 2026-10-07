@@ -527,7 +527,10 @@ body.is-dragging { user-select: none; -webkit-user-select: none; cursor: grabbin
   .snapshot { margin: 0 auto; }
 }
 @media (max-width: 400px) {
-  .header-inner .btn-small { padding: 8px 12px; }
+  .header-inner { gap: var(--space-3); }
+  .logo { font-size: 20px; }
+  .header-inner .btn-small { padding: 8px 14px; }
+  .hide-xs { display: none; }
   .toolbar .btn-tool { padding: 8px 10px; }
   .pill-row { gap: 6px; }
 }
